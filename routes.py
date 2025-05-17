@@ -19,7 +19,7 @@ versioning_bp = Blueprint("versioning", __name__)
 # routing function
 ##############################
 
-@versioning_bp.route("/<path:path>", methods = ["GET", "POST", "PUT", "DELETE", "PATCH"])
+@versioning_bp.route("/<path:path>", methods = ["POST", "GET", "PUT", "PATCH", "DELETE"])
 @jwt_required()
 def route_to_version(path):
     try:
