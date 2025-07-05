@@ -1,0 +1,26 @@
+name: unilever-scraping
+
+services:
+  ai-cahya_bert-base-indonesian-522m:
+    build: 
+      context: . 
+      dockerfile: ./dockerfile
+    image:
+      unilever-scraping-rest-routing-gateway
+    container_name: unilever-scraping-rest-routing-gateway
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./app:/home/project_home/project_workdir
+    working_dir: /home/project_home/project_workdir
+    command: >
+      bash -c "
+      python main.py
+      "
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    name: unilever-scraping-network
+    external: true
