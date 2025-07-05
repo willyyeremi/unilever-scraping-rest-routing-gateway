@@ -1,7 +1,7 @@
 name: unilever-scraping
 
 services:
-  ai-cahya_bert-base-indonesian-522m:
+  rest-routing-gateway:
     build: 
       context: . 
       dockerfile: ./dockerfile
@@ -15,7 +15,7 @@ services:
     working_dir: /home/project_home/project_workdir
     command: >
       bash -c "
-      python main.py
+      gunicorn --bind 0.0.0.0:5002 main:app
       "
     networks:
       - shared-network
