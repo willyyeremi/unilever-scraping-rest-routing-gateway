@@ -1,0 +1,26 @@
+name: unilever-scraping
+
+services:
+  rest-routing-gateway:
+    build: 
+      context: . 
+      dockerfile: ./dockerfile
+    image:
+      unilever-scraping-rest-routing-gateway
+    container_name: unilever-scraping-rest-routing-gateway
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./app:/home/project_home/project_workdir
+    working_dir: /home/project_home/project_workdir
+    command: >
+      bash -c "
+      gunicorn --bind 0.0.0.0:5002 main:app
+      "
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    name: unilever-scraping-network
+    external: true
